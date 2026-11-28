@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Keeps</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<!-- Purchase conversion, loaded hidden by the order page right after payment.
+     Its URL holds only the payment id and amount, never the private order link. -->
+<script src="assets/config.js?v=20261203"></script>
+<script src="assets/ads.js?v=20261203"></script>
+</head>
+<body>
+<script>
+(function () {
+  const q = new URLSearchParams(location.search);
+  const tx = q.get("tx"), value = Number(q.get("v")), currency = q.get("c");
+  if (!/^pay_[A-Za-z0-9]+$/.test(tx || "") || !(value > 0) || !/^[A-Z]{3}$/.test(currency || "")) return;
+  let email = ""; try { email = (localStorage.getItem("keeps-conv-email") || "").trim().toLowerCase(); localStorage.removeItem("keeps-conv-email"); } catch {}
+  K.ads.purchase({ value, currency, transaction_id: tx, email: /^[^\s@]+@[^\s@]+$/.test(email) ? email : undefined });
+})();
+</script>
+</body>
+</html>

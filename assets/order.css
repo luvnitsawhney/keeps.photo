@@ -1,0 +1,122 @@
+/* Organiser page pieces, built from app.css tokens only. */
+
+/* ---- profile card (step 1, and the dashboard hero) ---- */
+.profile { padding: .75rem; gap: 0; }
+.pf-photo { position: relative; display: grid; place-items: center; aspect-ratio: 3 / 2; border-radius: var(--r-m); overflow: hidden; cursor: pointer;
+  background: var(--bg-neutral); color: var(--interactive-primary); }
+.pf-photo:hover { background: var(--bg-neutral-hover); }
+.pf-photo:has(input:focus-visible) { box-shadow: var(--focus-ring); }
+.pf-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.pf-photo .ph { display: grid; justify-items: center; gap: .5rem; text-align: center; padding: 1rem; }
+.pf-photo .ph .ico { width: 2.5rem; height: 2.5rem; stroke-width: 1.5; }
+.pf-photo .ph b { font: var(--t-body-l-bold); color: var(--content-primary); }
+.pf-photo .ph span { font: var(--t-body); color: var(--content-secondary); }
+.pf-photo .pf-edit { position: absolute; top: .75rem; right: .75rem; display: inline-flex; align-items: center; gap: .375rem; height: 2rem; padding: 0 .75rem;
+  border-radius: var(--r-full); background: rgba(11, 11, 12, .55); color: #fff; font: var(--t-body-bold); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.pf-photo .pf-edit .ico { width: 1rem; height: 1rem; }
+.pf-photo.busy::after { content: ""; position: absolute; inset: 0; background: rgba(255, 255, 255, .5); }
+.pf-body { padding: 1rem .75rem .25rem; display: grid; gap: .25rem; }
+.pf-name { width: 100%; height: 2.75rem; padding: 0 .25rem; margin: 0 -.25rem; border: 0; border-radius: var(--r-s); background: transparent;
+  font: var(--t-sub); font-size: 1.625rem; letter-spacing: var(--track-tight); color: var(--content-primary); }
+.pf-name::placeholder { color: var(--content-tertiary); }
+.pf-name:hover { background: var(--bg-neutral); }
+.pf-name:focus { outline: none; background: var(--bg-neutral); box-shadow: inset 0 -2px 0 var(--interactive-primary); }
+.pf-body .t-body { padding: 0 .0625rem; }
+.pf-stats { display: grid; grid-template-columns: 1fr 1fr; margin-top: .75rem; padding-top: .75rem; box-shadow: 0 -1px 0 var(--border-neutral); }
+.pf-stat { display: grid; justify-items: center; gap: .125rem; padding: .5rem .5rem; border-radius: var(--r-m); text-align: center; color: var(--content-primary); }
+.pf-stat + .pf-stat { position: relative; }
+.pf-stat + .pf-stat::before { content: ""; position: absolute; left: 0; top: 20%; bottom: 20%; width: 1px; background: var(--border-neutral); }
+.pf-stat:hover { background: var(--bg-neutral); }
+.pf-stat .ico { width: 1.25rem; height: 1.25rem; color: var(--interactive-primary); margin-bottom: .25rem; }
+.pf-stat b { font: var(--t-body-l-bold); }
+.pf-stat b.ph { color: var(--content-link); }
+.pf-stat span { font: var(--t-body); color: var(--content-secondary); }
+.field.invalid .pf-stat b.ph, .pf-stats.invalid .ph { color: var(--sentiment-negative); }
+
+/* ---- video shape options ---- */
+.shape-ill { flex: none; width: 3rem; height: 3rem; display: grid; place-items: center; border-radius: 50%; background: var(--bg-neutral); }
+.shape-ill i { display: block; border: 2px solid var(--interactive-primary); border-radius: 4px; }
+.shape-ill i.land { width: 1.75rem; height: 1.125rem; }
+.shape-ill i.port { width: 1.125rem; height: 1.75rem; }
+.li:has(input:checked) { background: var(--bg-neutral); }
+
+/* ---- style tiles ---- */
+.styles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-between-cards); }
+@media (min-width: 560px) { .sheet .styles, .styles.all { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.st-tile { position: relative; display: grid; gap: .375rem; align-content: start; cursor: pointer; }
+.st-tile input { position: absolute; opacity: 0; pointer-events: none; }
+.st-tile .sw { position: relative; aspect-ratio: 4 / 3; border-radius: var(--r-m); overflow: hidden; background: var(--sw, var(--bg-neutral)); display: grid; place-items: center; transition: box-shadow var(--dur-fast) var(--ease); }
+.st-tile .sw img { width: 100%; height: 100%; object-fit: cover; }
+.st-tile .sw .ico { width: 1.75rem; height: 1.75rem; color: var(--interactive-primary); }
+.st-tile .sw::after { content: ""; position: absolute; top: .5rem; right: .5rem; width: 1.5rem; height: 1.5rem; border-radius: 50%; background: var(--bg-elevated); box-shadow: inset 0 0 0 2px var(--border-input); opacity: 0; transition: opacity var(--dur-fast); }
+.st-tile input:checked + .sw { box-shadow: 0 0 0 3px var(--interactive-primary); }
+.st-tile input:checked + .sw::after { opacity: 1; background: var(--interactive-primary) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center / 70% no-repeat; box-shadow: none; }
+.st-tile input:focus-visible + .sw { box-shadow: var(--focus-ring); }
+.st-tile b { font: var(--t-body-bold); }
+.st-tile small { font: var(--t-body); color: var(--content-secondary); margin-top: -.25rem; }
+
+/* ---- dashboard hero ---- */
+.hero-top { display: flex; align-items: center; gap: 1rem; }
+.hero-top .who { min-width: 0; display: grid; gap: .125rem; }
+.hero-top .who h1 { font: var(--t-section); letter-spacing: var(--track-tight); overflow-wrap: anywhere; }
+.hero-top .badge { justify-self: start; margin-bottom: .25rem; }
+.hero .kv { padding: 1rem 0; border-radius: var(--r-m); background: var(--bg-neutral); }
+.hero .kv > * + * { box-shadow: -1px 0 0 var(--border-neutral); }
+.hero .kv b { font-variant-numeric: tabular-nums; }
+.closes { font: var(--t-body); color: var(--content-secondary); }
+.closes b { color: var(--content-primary); }
+
+/* ---- empty state ---- */
+.empty { display: grid; justify-items: center; gap: .5rem; padding: 1.5rem 1rem; text-align: center; }
+.empty .av { margin-bottom: .25rem; }
+.empty .t-body { max-width: 20rem; }
+
+/* ---- thank-you sheet ---- */
+.thanks { display: grid; justify-items: center; gap: var(--sp-display-bottom); padding: 1rem 0 .5rem; text-align: center; }
+.thanks .av { --s: 4.5rem; }
+.thanks .av .ico { stroke-width: 2.4; }
+.thanks .t-display { font-size: 2.25rem; }
+
+/* ---- invite card preview ---- */
+.invite-prev { border-radius: var(--r-m); overflow: hidden; background: var(--bg-neutral); aspect-ratio: 1200 / 630; }
+.invite-prev img { width: 100%; height: 100%; object-fit: cover; }
+.msg-prev { padding: 1rem; border-radius: var(--r-m); background: var(--bg-neutral); font: var(--t-body); white-space: pre-wrap; overflow-wrap: anywhere; }
+
+/* ---- rating ---- */
+.stars { display: grid; grid-template-columns: repeat(5, 1fr); gap: .5rem; }
+.stars label { position: relative; }
+.stars input { position: absolute; opacity: 0; }
+.stars span { display: grid; place-items: center; height: 3rem; border-radius: var(--r-m); background: var(--bg-neutral); font: var(--t-body-l-bold); cursor: pointer; }
+.stars input:checked + span { background: var(--interactive-primary); color: #fff; }
+.stars input:focus-visible + span { box-shadow: var(--focus-ring); }
+.scale { display: flex; justify-content: space-between; font: var(--t-body); color: var(--content-secondary); }
+
+/* bullet list inside sheets */
+.ticks { display: grid; gap: .75rem; }
+.ticks li { display: flex; gap: .75rem; font: var(--t-body-l); }
+.ticks .ico { width: 1.25rem; height: 1.25rem; margin-top: .125rem; color: var(--interactive-primary); }
+.lock-note, .cast-tip { display: flex; gap: .5rem; align-items: center; }
+.lock-note { padding: .75rem 1.5rem 0; }
+.card > .list { margin: 0 calc(-1 * var(--pad-s)); }
+.card > .list .li { padding-left: var(--pad-s); padding-right: var(--pad-s); }
+/* inside a sheet, cards flatten into sections (no white-on-white boxes) */
+.sheet .card:not(.profile) { padding: 0; border-radius: 0; background: none; }
+.sheet .card + .card { margin-top: var(--sp-component); padding-top: var(--sp-between-sections); box-shadow: 0 -1px 0 var(--border-neutral); }
+.sheet .card.profile { box-shadow: inset 0 0 0 1px var(--border-neutral); }
+
+/* ---- step 1: occasion + date rows (read as tappable list items, not stats) ---- */
+.pf-rows { display: grid; margin: .75rem calc(-1 * .75rem) 0; padding-top: .25rem; box-shadow: 0 -1px 0 var(--border-neutral); }
+.pf-rows .field { gap: 0; }
+.pf-rows .msg-err:not(:empty) { padding: 0 1.5rem .5rem; }
+.pf-row { width: 100%; text-align: left; padding-left: 1.5rem; padding-right: 1.25rem; }
+.pf-row .txt { display: grid; gap: .125rem; }
+.pf-row .dsc { order: -1; }
+.pf-row .ttl { font: var(--t-body-l-bold); }
+.pf-row .ttl.ph { color: var(--content-link); }
+.pf-row .av { background: var(--interactive-secondary); color: var(--interactive-primary); }
+.field.invalid .pf-row .ttl.ph { color: var(--sentiment-negative); }
+/* invite step explainer */
+.card.how { background: var(--interactive-secondary); }
+.card.how .ticks li { font: var(--t-body); }
+.card.how .ticks b { font-weight: 700; }
+.li .when { flex: none; color: var(--content-secondary); text-align: right; }

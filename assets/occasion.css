@@ -1,0 +1,89 @@
+/* Occasion pages (birthday, anniversary, farewell). Built on keeps.css and its tokens: spacing, padding,
+   sizing and radii come from the Keeps foundations, never raw numbers. Buttons, nav, the phone frame and the
+   How it works cards are the shared components in keeps.css. Everything here is scoped to body.ocp. */
+
+.ocp { --occ: #ffc531; --occ-soft: #fff4d6; }
+.ocp.anniv { --occ: #e8457a; --occ-soft: #fde8ef; }
+.ocp.bye { --occ: #ff7a45; --occ-soft: #ffeee5; }
+
+/* ---------- 1. hero: the promise, the price, a real film ---------- */
+.ocp .hero.oc { text-align: left; padding: clamp(var(--size-32), 4.5vw, var(--size-72)) 0 clamp(var(--size-40), 5vw, var(--size-72)); }
+.oc-hero { display: grid; gap: var(--padding-large); }
+.oc-copy h1 { font-size: clamp(2.25rem, 4vw, 3.75rem); font-weight: 700; letter-spacing: -.035em; line-height: 1.02; }
+.oc-copy h1 span { display: block; }
+.oc-copy .sub { margin-top: var(--space-content-to-button); font-size: clamp(1.0625rem, 1.5vw, 1.25rem); line-height: 1.45; color: #3a3a3c; max-width: 31em; }
+.oc-copy .cta-stack { align-items: flex-start; margin-top: var(--padding-large); }
+.ocp .hero .screen { transform: none; }
+@media (min-width: 900px) {
+  .oc-hero { grid-template-columns: 1fr 1.08fr; column-gap: clamp(var(--size-32), 4vw, var(--size-64)); align-items: center; }
+}
+
+/* ---------- 2. how it works: shared .how-cards (keeps.css), standard band spacing ---------- */
+
+/* ---------- 3. themes + moods + film ---------- */
+.oc-themes { list-style: none; margin-bottom: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--padding-medium) var(--space-component); }
+@media (min-width: 900px) { .oc-themes { grid-template-columns: repeat(4, 1fr); } }
+.theme { min-width: 0; }
+.theme img, .theme .tile { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--r-md); background: #f0efe8; }
+.theme .tile { display: grid; place-items: center; color: var(--blue); }
+.theme .tile svg { width: var(--sizing-icon-large); height: var(--sizing-icon-large); }
+.theme.surprise .tile { background: #e8efff; }
+.theme.own .tile { background: var(--occ-soft); color: var(--ink); border: 2px dashed rgba(0,0,0,.15); }
+.theme h3 { margin-top: var(--space-text-to-component); font-size: 1.125rem; font-weight: 700; letter-spacing: -.02em; }
+.theme p { margin-top: var(--space-between-text); font-size: .9rem; color: var(--grey); line-height: 1.4; }
+.moods { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-between-chips); margin-top: var(--padding-large); font-size: .9375rem; }
+.moods b { margin-right: var(--space-between-text); font-weight: 700; }
+.moods span { padding: var(--size-8) var(--padding-small); border-radius: 999px; background: #f3f5fa; }
+.moods .more { background: transparent; color: var(--grey); padding-left: 0; }
+.ocp .white .film p { color: var(--grey); }
+.ocp .white .film-nav button { background: #ececef; color: var(--ink); }
+.ocp .white .film-nav button:hover { background: #dedee3; }
+.ocp .screen.one-film { max-width: 980px; margin-top: clamp(var(--size-40), 5.5vw, var(--size-72)); }
+.ocp .films { margin-top: clamp(var(--size-40), 5.5vw, var(--size-72)); }
+
+/* ---------- 4. easy for everyone ---------- */
+.easy-split { display: grid; gap: clamp(var(--size-40), 5vw, var(--size-64)); align-items: center; }
+@media (min-width: 900px) { .easy-split { grid-template-columns: 1.1fr 1fr; } }
+.easy { list-style: none; padding: 0; margin: var(--padding-large) 0 0; display: grid; gap: var(--space-component); }
+.easy li, .you { display: grid; grid-template-columns: var(--sizing-large) 1fr; gap: var(--space-component); align-items: center; font-size: 1.0625rem; line-height: 1.45; color: #3a3a3c; }
+.easy b, .you b { color: var(--ink); }
+.ic { display: grid; place-items: center; }
+.easy .ic, .you .ic { width: var(--sizing-large); height: var(--sizing-large); border-radius: var(--r-sm); background: #fff; color: var(--blue); box-shadow: 0 0 0 1px rgba(0,0,0,.06); }
+.you { margin-top: var(--padding-medium); padding: var(--padding-small); border-radius: var(--r-md); background: #fff; box-shadow: 0 0 0 1.5px var(--blue); }
+.you .ic { background: var(--blue); color: #fff; box-shadow: none; }
+.duo { display: grid; grid-template-columns: 1fr 1fr; gap: var(--padding-medium); justify-self: center; width: 100%; max-width: 560px; }
+.duo figure, .solo { margin: 0; display: grid; justify-items: center; }
+.duo .handset { --pw: 268px; }
+.duo figcaption, .solo figcaption { margin-top: var(--space-text-to-component); text-align: center; font-size: .9rem; color: var(--grey); }
+.oc-easy .compare-cap { color: var(--grey); }
+.oc-easy .compare-cap span:last-child { color: var(--grey-2); }
+
+/* ---------- 5. reveal ---------- */
+.reveal-split { display: grid; gap: clamp(var(--size-40), 5vw, var(--size-64)); align-items: center; }
+@media (min-width: 900px) { .reveal-split { grid-template-columns: 1.35fr 1fr; } }
+.oc-reveal .lede { color: rgba(255,255,255,.92); margin-top: var(--space-content-to-button); }
+.oc-tiles { list-style: none; margin-bottom: 0; padding: 0; display: grid; gap: var(--space-between-cards); grid-template-columns: repeat(2, 1fr); }
+.oc-tiles li { border-radius: var(--r-md); padding: var(--padding-small); background: rgba(255,255,255,.12); }
+.oc-tiles .ic { width: var(--sizing-large); height: var(--sizing-large); border-radius: 50%; background: #fff; color: var(--blue); }
+.oc-tiles h3 { margin-top: var(--space-text-to-component); font-size: 1.0625rem; font-weight: 700; letter-spacing: -.015em; }
+.oc-tiles p { margin-top: var(--space-between-text); font-size: .9rem; line-height: 1.4; color: rgba(255,255,255,.85); }
+.solo .handset { --pw: 300px; }
+.solo .handset-frame { box-shadow: 0 30px 60px -24px rgba(0, 0, 0, .45); }
+.solo figcaption { color: rgba(255,255,255,.85); }
+
+/* ---------- 6. price ---------- */
+.incl { list-style: none; padding: 0; margin: var(--padding-medium) 0 0; display: grid; gap: var(--space-between-text); }
+.incl li { position: relative; padding-left: var(--size-32); font-size: 1rem; line-height: 1.4; }
+.incl li::before { content: ""; position: absolute; left: 0; top: 1px; width: 20px; height: 20px; border-radius: 50%;
+  background: #e8efff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.5 2.5L12 5.5' fill='none' stroke='%23004ef7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 14px no-repeat; }
+.split-note { margin-top: var(--space-text-to-component); padding: var(--size-12) var(--padding-small); border-radius: var(--r-sm); background: #f5f5f0; font-size: .9375rem; color: #3a3a3c; }
+.ocp .promise { font-size: clamp(1.0625rem, 1.7vw, 1.25rem); }
+.ocp .guarantee h3 { margin-top: var(--padding-large); padding-top: 0; }
+
+/* ---------- phones ---------- */
+@media (max-width: 640px) {
+  .duo { gap: var(--space-component); }
+  .duo .handset { --pw: 100%; }
+  .solo .handset { --pw: 250px; }
+  .oc-tiles li { padding: var(--size-12); }
+}

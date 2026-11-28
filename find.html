@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lost your film page? · Keeps</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#e6efff">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/app.css?v=20261203">
+</head>
+<body>
+<header class="appbar"><a class="logo" href="/" aria-label="Keeps home"><svg viewBox="0 222 368 92" aria-hidden="true"><use href="assets/brand/keeps-logo.svg#logo"/></svg></a></header>
+<main class="page">
+  <div class="page-head">
+    <h1 class="t-screen">Lost your film page?</h1>
+    <p class="t-lead">Enter the email you ordered with. We'll send your private link there.</p>
+  </div>
+  <form class="card" id="find" novalidate>
+    <div class="field"><label for="email">Email</label>
+      <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required placeholder="you@example.com">
+      <p class="msg-err" id="find-err" role="alert"></p></div>
+    <button class="btn block" type="submit">Email my link</button>
+    <div class="alert positive hidden" id="find-ok" role="status"></div>
+  </form>
+  <p class="t-body" style="padding:0 .25rem">Sending a wish? You don't need this. Use the link the organiser shared with you.</p>
+</main>
+<footer class="foot"><span>© Keeps · keeps.photo</span><nav><a href="terms.html">Terms</a><a href="refunds.html">Refunds</a><a href="privacy.html">Privacy</a><a data-contact></a></nav></footer>
+<script src="assets/config.js?v=20261203"></script><script src="assets/analytics.js?v=20261203"></script><script src="assets/common.js?v=20261203"></script><script src="assets/ui.js?v=20261203"></script>
+<script>
+(function () {
+  const f = K.$("#find"), errEl = K.$("#find-err"), ok = K.$("#find-ok");
+  f.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = f.elements.email.value.trim();
+    const bad = !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
+    errEl.textContent = bad ? "Enter the email you ordered with." : "";
+    errEl.closest(".field").classList.toggle("invalid", bad);
+    if (bad) return f.elements.email.focus();
+    const btn = f.querySelector("button"); btn.classList.add("is-loading"); btn.disabled = true; ok.classList.add("hidden");
+    try {
+      if (!K.demo) await K.api("/order/find", { email });
+      K.track("find_link_requested", {});
+      ok.innerHTML = `${K.icon("check")}<span>If there's an order under <b>${K.esc(email)}</b>, its link is on the way. Check spam too. Nothing after 10 minutes? Email ${K.esc(K.cfg.contactEmail)}.</span>`;
+      ok.classList.remove("hidden");
+    } catch (x) { errEl.textContent = x.message; }
+    btn.classList.remove("is-loading"); btn.disabled = false;
+  });
+})();
+</script>
+</body></html>
